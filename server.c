@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -38,7 +39,8 @@ int main()
 		printf("Waiting for connections...\n");
 		clientfd = accept(serverfd, (struct sockaddr*) &client, &csize);
 		recv(clientfd, buffer, sizeof(buffer), 0);  
-		printf("\nMessage received:\n\t%s", buffer);
+		printf("Message received:\n\t%s\n", buffer);
+		memset(buffer, 0, sizeof(buffer));
 		close(clientfd);
 	}
 
