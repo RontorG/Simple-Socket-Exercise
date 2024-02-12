@@ -14,14 +14,20 @@ void error(char *msg)
 }
 
 
-int main() 
+int main(int argc, char *argv[]) 
 {
 	struct sockaddr_in server, client;
-	int serverfd, clientfd, csize;
+	int serverfd, clientfd, csize, port;
 	char buffer[256];
 
+	if (argc != 2) {
+		fprintf(stderr, "Usage: %s [port]\n", argv[0]);
+		exit(2);
+	}
+
+	port = atoi(argv[1]);
 	server.sin_family = AF_INET;
-	server.sin_port = htons(1337);
+	server.sin_port = htons(port);
 	server.sin_addr.s_addr = INADDR_ANY;
 	
 	serverfd = socket(AF_INET, SOCK_STREAM, 0);
