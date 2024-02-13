@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+#define BSIZE 256
 
 void error(char *msg)
 {
@@ -16,9 +17,9 @@ void error(char *msg)
 
 int main(int argc, char *argv[]) 
 {
-	struct sockaddr_in server, client;
 	int serverfd, clientfd, csize, port;
-	char buffer[256];
+	struct sockaddr_in server, client;
+	char buffer[BSIZE];
 
 	if (argc != 2) {
 		fprintf(stderr, "Usage: %s [port]\n", argv[0]);
